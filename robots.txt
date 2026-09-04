@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hammad-masalah-site.vercel.app/sitemap.xml
