@@ -9,7 +9,12 @@
     root.lang = lang;
     root.dir = isArabic ? "rtl" : "ltr";
     translatable.forEach((el) => {
-      el.textContent = isArabic ? el.dataset.ar : el.dataset.en;
+      const value = isArabic ? el.dataset.ar : el.dataset.en;
+      if (el.tagName === "H1" || el.tagName === "H2") {
+        el.innerHTML = value;
+      } else {
+        el.textContent = value;
+      }
     });
     if (toggle) {
       toggle.textContent = isArabic ? "EN" : "AR";
@@ -18,9 +23,7 @@
         isArabic ? "Switch to English" : "التبديل إلى العربية"
       );
     }
-    document.title = isArabic
-      ? "Hammad Masalah | Media Portfolio"
-      : "Hammad Masalah | Media Portfolio";
+    document.title = "Hammad Masalah | Media Portfolio";
     localStorage.setItem("site-language", lang);
   };
 
