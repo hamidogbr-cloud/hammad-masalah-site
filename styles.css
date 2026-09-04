@@ -63,3 +63,8 @@ body[dir="ltr"] h1 { letter-spacing: -.07em; } body[dir="ltr"] .hero-summary, bo
 @keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes orbitSpinReverse { from { transform: rotate(30deg); } to { transform: rotate(-330deg); } }
 @media (prefers-reduced-motion: reduce) { .portrait-frame, .orbit-one, .orbit-two { animation: none; } }
+
+/* Cinematic media background — original background color preserved */
+body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: url("media-bg.svg"); background-repeat: repeat; background-size: 760px 520px; opacity: .055; mix-blend-mode: screen; }
+body > * { position: relative; z-index: 1; }
+@media (max-width: 760px) { body::before { background-size: 520px 360px; opacity: .045; } }
