@@ -77,6 +77,41 @@
     .contact { background:linear-gradient(135deg,#d6a45c 0%,#f0c981 42%,#67d7ff 100%) !important; }
     .contact-glow { border-color:rgba(15,25,35,.2) !important; }
     .contact-links a:hover { border-color:#67d7ff !important; }
+
+    /* Hero text + labels: warm champagne palette pulled from the portrait's tie and skin tones. */
+    .hero-copy .hero-kicker {
+      color:#f0c981 !important;
+      text-shadow:0 0 18px rgba(240,201,129,.18);
+      letter-spacing:.12em;
+    }
+    .hero-copy h1 {
+      color:#f2f0e9 !important;
+      text-shadow:0 8px 28px rgba(0,0,0,.28);
+    }
+    .hero-copy h1 em {
+      color:#f0c981 !important;
+      background:linear-gradient(110deg,#d6a45c 0%,#f0c981 48%,#fff1d0 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:none;
+    }
+    .hero-copy .hero-summary {
+      color:#d9d4cc !important;
+    }
+    .portrait-label {
+      background:rgba(8,10,14,.88) !important;
+      color:#fff1d0 !important;
+      border:1px solid rgba(240,201,129,.72) !important;
+      box-shadow:0 8px 26px rgba(0,0,0,.28),0 0 18px rgba(240,201,129,.10);
+      backdrop-filter:blur(6px);
+    }
+    .portrait-label strong { color:#f0c981 !important; }
+    .audio-lines i {
+      background:linear-gradient(to top,#d6a45c,#fff1d0) !important;
+      box-shadow:0 0 8px rgba(240,201,129,.28);
+    }
+
     @keyframes portraitTilt { 0%,100% { transform:rotate(-5deg) scale(1); } 50% { transform:rotate(5deg) scale(1.015); } }
     @keyframes portraitRingSpin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
     @keyframes orbitSpinOne { from { transform:translateZ(0) rotate(0deg); } to { transform:translateZ(0) rotate(360deg); } }
