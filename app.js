@@ -36,60 +36,47 @@
 
   if (year) year.textContent = new Date().getFullYear();
 
-  // Keep the portrait effects smooth without making the whole page feel busy.
+  // Restore the original portrait treatment: the photo keeps its gold frame,
+  // while the two outer circles stay segmented and rotate around it.
   const style = document.createElement("style");
   style.textContent = `
     .portrait-wrap {
       contain: layout paint;
     }
     .portrait-frame {
-      overflow: visible !important;
-      isolation: isolate;
-      border-color: transparent !important;
-      background: transparent !important;
-      box-shadow: 0 24px 70px rgba(0,0,0,.42);
+      overflow: hidden !important;
+      isolation: auto;
+      border: 8px solid rgba(214,164,92,.88) !important;
+      background: #d6d0c7 !important;
+      box-shadow: 0 24px 70px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.25) !important;
     }
     .portrait-frame::before {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #b98643 0deg, #d6a45c 55deg, #f0c981 110deg, #d6a45c 165deg, #b98643 220deg, #d6a45c 275deg, #f0c981 330deg, #b98643 360deg);
-      z-index: 0;
-      animation: portraitRingSpin 14s linear infinite;
-      will-change: transform;
-      transform: translateZ(0);
-      filter: drop-shadow(0 0 7px rgba(240,201,129,.25));
+      content: none !important;
+      display: none !important;
     }
     .portrait-frame img {
-      position: relative;
-      z-index: 1;
+      position: static;
+      z-index: auto;
       width: 100% !important;
       height: 100% !important;
-      border-radius: 50%;
+      border-radius: 0;
       object-fit: cover;
       display: block;
     }
-    .portrait-frame::after {
-      z-index: 2 !important;
-      border-radius: 50%;
-      pointer-events: none;
-    }
     .orbit {
-      will-change: transform;
       transform-origin: center center;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+      will-change: transform;
+      border-color: rgba(214,164,92,.46) !important;
     }
     .orbit-one {
+      border-style: dashed !important;
       animation: orbitSpinOne 28s linear infinite;
     }
     .orbit-two {
+      border-style: dotted !important;
       animation: orbitSpinTwo 36s linear infinite reverse;
-    }
-    @keyframes portraitRingSpin {
-      from { transform: translateZ(0) rotate(0deg); }
-      to { transform: translateZ(0) rotate(360deg); }
     }
     @keyframes orbitSpinOne {
       from { transform: translateZ(0) rotate(0deg); }
@@ -102,12 +89,11 @@
     .grain { opacity: .025; }
     @media (max-width: 760px) {
       .grain { display: none; }
+      .orbit { border-color: rgba(214,164,92,.52) !important; }
       .orbit-one { animation-duration: 34s; }
       .orbit-two { animation-duration: 44s; }
-      .portrait-frame::before { animation-duration: 16s; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .portrait-frame::before,
       .orbit-one,
       .orbit-two { animation: none; }
     }
