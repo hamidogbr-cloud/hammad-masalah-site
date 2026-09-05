@@ -36,31 +36,48 @@
 
   if (year) year.textContent = new Date().getFullYear();
 
-  // Restore the original portrait treatment: the photo keeps its gold frame,
-  // while the two outer circles rotate around it; the inner circle keeps its gaps.
+  // Restore the original portrait look: animated gold highlight around the
+  // photo, a solid outer orbit, a dashed inner orbit, and small rotating nodes.
   const style = document.createElement("style");
   style.textContent = `
     .portrait-wrap {
       contain: layout paint;
     }
     .portrait-frame {
-      overflow: hidden !important;
-      isolation: auto;
+      overflow: visible !important;
+      isolation: isolate;
       border: 8px solid rgba(214,164,92,.88) !important;
-      background: #d6d0c7 !important;
+      background: transparent !important;
       box-shadow: 0 24px 70px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.25) !important;
     }
     .portrait-frame::before {
-      content: none !important;
-      display: none !important;
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(214,164,92,.14) 45deg,
+        rgba(240,201,129,1) 95deg,
+        rgba(214,164,92,.18) 145deg,
+        transparent 210deg,
+        transparent 360deg
+      );
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 7px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 7px));
+      z-index: -1;
+      animation: portraitRingSpin 12s linear infinite;
+      pointer-events: none;
     }
     .portrait-frame img {
       position: static;
       z-index: auto;
       width: 100% !important;
       height: 100% !important;
-      border-radius: 0;
+      border-radius: 50% !important;
       object-fit: cover;
+      object-position: center top;
       display: block;
     }
     .orbit {
@@ -69,6 +86,28 @@
       -webkit-backface-visibility: hidden;
       will-change: transform;
       border-color: rgba(214,164,92,.46) !important;
+      pointer-events: none;
+    }
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d6a45c;
+      box-shadow: 0 0 0 2px rgba(214,164,92,.16), 0 0 14px rgba(214,164,92,.55);
+      pointer-events: none;
+    }
+    .orbit::before {
+      top: -4px;
+      left: calc(50% - 4px);
+    }
+    .orbit::after {
+      bottom: -4px;
+      right: calc(50% - 4px);
+      width: 6px;
+      height: 6px;
     }
     .orbit-one {
       border-style: solid !important;
@@ -77,6 +116,10 @@
     .orbit-two {
       border-style: dashed !important;
       animation: orbitSpinTwo 36s linear infinite reverse;
+    }
+    @keyframes portraitRingSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     @keyframes orbitSpinOne {
       from { transform: translateZ(0) rotate(0deg); }
@@ -92,8 +135,11 @@
       .orbit { border-color: rgba(214,164,92,.52) !important; }
       .orbit-one { animation-duration: 34s; }
       .orbit-two { animation-duration: 44s; }
+      .orbit::before,
+      .orbit::after { width: 7px; height: 7px; }
     }
     @media (prefers-reduced-motion: reduce) {
+      .portrait-frame::before,
       .orbit-one,
       .orbit-two { animation: none; }
     }
