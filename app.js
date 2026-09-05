@@ -99,14 +99,12 @@
       from { transform: translateZ(0) rotate(30deg); }
       to { transform: translateZ(0) rotate(390deg); }
     }
-    /* The grain texture is visually nice but expensive on some phones. */
     .grain { opacity: .025; }
     @media (max-width: 760px) {
       .grain { display: none; }
       .orbit-one { animation-duration: 34s; }
       .orbit-two { animation-duration: 44s; }
       .portrait-frame::before { animation-duration: 16s; }
-      .orbit { border-width: 1.5px; border-color: rgba(240,201,129,.52); }
     }
     @media (prefers-reduced-motion: reduce) {
       .portrait-frame::before,
