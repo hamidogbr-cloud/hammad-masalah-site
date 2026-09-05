@@ -37,7 +37,7 @@
   if (year) year.textContent = new Date().getFullYear();
 
   // Restore the original portrait treatment: the photo keeps its gold frame,
-  // while the two outer circles stay segmented and rotate around it.
+  // while the two outer circles rotate around it; the inner circle keeps its gaps.
   const style = document.createElement("style");
   style.textContent = `
     .portrait-wrap {
@@ -71,11 +71,11 @@
       border-color: rgba(214,164,92,.46) !important;
     }
     .orbit-one {
-      border-style: dashed !important;
+      border-style: solid !important;
       animation: orbitSpinOne 28s linear infinite;
     }
     .orbit-two {
-      border-style: dotted !important;
+      border-style: dashed !important;
       animation: orbitSpinTwo 36s linear infinite reverse;
     }
     @keyframes orbitSpinOne {
