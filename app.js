@@ -48,6 +48,8 @@
       border: 8px solid rgba(214,164,92,.88) !important;
       background: transparent !important;
       box-shadow: 0 24px 70px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.25) !important;
+      transform-origin: center center;
+      animation: portraitTilt 6s ease-in-out infinite;
     }
     .portrait-frame::before {
       content: "";
@@ -111,6 +113,10 @@
       border-style: dashed !important;
       animation: orbitSpinTwo 36s linear infinite reverse;
     }
+    @keyframes portraitTilt {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
     @keyframes portraitRingSpin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -137,6 +143,7 @@
       }
     }
     @media (prefers-reduced-motion: reduce) {
+      .portrait-frame,
       .portrait-frame::before,
       .orbit-one,
       .orbit-two { animation: none; }
