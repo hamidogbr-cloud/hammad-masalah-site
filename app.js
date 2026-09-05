@@ -36,8 +36,12 @@
 
   if (year) year.textContent = new Date().getFullYear();
 
+  // Keep the portrait effects smooth without making the whole page feel busy.
   const style = document.createElement("style");
   style.textContent = `
+    .portrait-wrap {
+      contain: layout paint;
+    }
     .portrait-frame {
       overflow: visible !important;
       isolation: isolate;
@@ -52,8 +56,10 @@
       border-radius: 50%;
       background: conic-gradient(from 0deg, transparent 0deg, rgba(214,164,92,.15) 45deg, rgba(240,201,129,1) 95deg, rgba(214,164,92,.18) 145deg, transparent 210deg, transparent 360deg);
       z-index: 0;
-      animation: portraitRingSpin 5.5s linear infinite;
-      filter: drop-shadow(0 0 8px rgba(240,201,129,.35));
+      animation: portraitRingSpin 12s linear infinite;
+      will-change: transform;
+      transform: translateZ(0);
+      filter: drop-shadow(0 0 7px rgba(240,201,129,.25));
     }
     .portrait-frame img {
       position: relative;
@@ -69,12 +75,42 @@
       border-radius: 50%;
       pointer-events: none;
     }
+    .orbit {
+      will-change: transform;
+      transform-origin: center center;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .orbit-one {
+      animation: orbitSpinOne 28s linear infinite;
+    }
+    .orbit-two {
+      animation: orbitSpinTwo 36s linear infinite reverse;
+    }
     @keyframes portraitRingSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from { transform: translateZ(0) rotate(0deg); }
+      to { transform: translateZ(0) rotate(360deg); }
+    }
+    @keyframes orbitSpinOne {
+      from { transform: translateZ(0) rotate(0deg); }
+      to { transform: translateZ(0) rotate(360deg); }
+    }
+    @keyframes orbitSpinTwo {
+      from { transform: translateZ(0) rotate(30deg); }
+      to { transform: translateZ(0) rotate(390deg); }
+    }
+    /* The grain texture is visually nice but expensive on some phones. */
+    .grain { opacity: .025; }
+    @media (max-width: 760px) {
+      .grain { display: none; }
+      .orbit-one { animation-duration: 34s; }
+      .orbit-two { animation-duration: 44s; }
+      .portrait-frame::before { animation-duration: 14s; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .portrait-frame::before { animation: none; }
+      .portrait-frame::before,
+      .orbit-one,
+      .orbit-two { animation: none; }
     }
   `;
   document.head.appendChild(style);
