@@ -36,8 +36,7 @@
 
   if (year) year.textContent = new Date().getFullYear();
 
-  // Restore the original portrait look: animated gold highlight around the
-  // photo, a solid outer orbit, a dashed inner orbit, and small rotating nodes.
+  // Animated portrait frame + one glowing point travelling around each orbit.
   const style = document.createElement("style");
   style.textContent = `
     .portrait-wrap {
@@ -88,26 +87,21 @@
       border-color: rgba(214,164,92,.46) !important;
       pointer-events: none;
     }
-    .orbit::before,
-    .orbit::after {
+    .orbit::before {
       content: "";
       position: absolute;
-      width: 8px;
-      height: 8px;
+      top: -5px;
+      left: calc(50% - 5px);
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: #d6a45c;
-      box-shadow: 0 0 0 2px rgba(214,164,92,.16), 0 0 14px rgba(214,164,92,.55);
+      background: #f0c981;
+      box-shadow: 0 0 0 2px rgba(214,164,92,.18), 0 0 16px rgba(214,164,92,.75);
       pointer-events: none;
     }
-    .orbit::before {
-      top: -4px;
-      left: calc(50% - 4px);
-    }
     .orbit::after {
-      bottom: -4px;
-      right: calc(50% - 4px);
-      width: 6px;
-      height: 6px;
+      content: none;
+      display: none;
     }
     .orbit-one {
       border-style: solid !important;
@@ -135,8 +129,12 @@
       .orbit { border-color: rgba(214,164,92,.52) !important; }
       .orbit-one { animation-duration: 34s; }
       .orbit-two { animation-duration: 44s; }
-      .orbit::before,
-      .orbit::after { width: 7px; height: 7px; }
+      .orbit::before {
+        width: 8px;
+        height: 8px;
+        top: -4px;
+        left: calc(50% - 4px);
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .portrait-frame::before,
