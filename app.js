@@ -75,11 +75,19 @@
       border-radius: 50%;
       pointer-events: none;
     }
+    /* Both outer orbit rings stay completely visible while rotating. */
     .orbit {
+      z-index: 3 !important;
+      border-style: solid !important;
+      border-width: 2px !important;
+      border-color: rgba(240,201,129,.58) !important;
+      opacity: 1 !important;
+      pointer-events: none;
       will-change: transform;
       transform-origin: center center;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+      filter: drop-shadow(0 0 4px rgba(240,201,129,.16));
     }
     .orbit-one {
       animation: orbitSpinOne 28s linear infinite;
