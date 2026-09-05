@@ -54,9 +54,9 @@
       position: absolute;
       inset: -7px;
       border-radius: 50%;
-      background: conic-gradient(from 0deg, transparent 0deg, rgba(214,164,92,.15) 45deg, rgba(240,201,129,1) 95deg, rgba(214,164,92,.18) 145deg, transparent 210deg, transparent 360deg);
+      background: conic-gradient(from 0deg, #b98643 0deg, #d6a45c 55deg, #f0c981 110deg, #d6a45c 165deg, #b98643 220deg, #d6a45c 275deg, #f0c981 330deg, #b98643 360deg);
       z-index: 0;
-      animation: portraitRingSpin 12s linear infinite;
+      animation: portraitRingSpin 14s linear infinite;
       will-change: transform;
       transform: translateZ(0);
       filter: drop-shadow(0 0 7px rgba(240,201,129,.25));
@@ -105,7 +105,7 @@
       .grain { display: none; }
       .orbit-one { animation-duration: 34s; }
       .orbit-two { animation-duration: 44s; }
-      .portrait-frame::before { animation-duration: 14s; }
+      .portrait-frame::before { animation-duration: 16s; }
     }
     @media (prefers-reduced-motion: reduce) {
       .portrait-frame::before,
