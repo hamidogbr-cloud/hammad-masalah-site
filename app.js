@@ -36,7 +36,7 @@
       background: linear-gradient(#10131a,#10131a) padding-box, linear-gradient(135deg,#f0c981 0%,#d6a45c 30%,#67d7ff 62%,#9b7cff 82%,#f0c981 100%) border-box !important;
       box-shadow: 0 24px 70px rgba(0,0,0,.42), 0 0 28px rgba(103,215,255,.16), 0 0 32px rgba(155,124,255,.12) !important;
       transform-origin: center center;
-      animation: portraitTilt 6s ease-in-out infinite;
+      animation: portraitTilt 14s ease-in-out infinite;
     }
     .portrait-frame::before {
       content:""; position:absolute; inset:-6px; border-radius:50%;
@@ -78,27 +78,26 @@
     .contact-links a:hover { border-color:#67d7ff !important; }
 
     .hero-copy .hero-kicker { color:#f0c981 !important; text-shadow:0 0 18px rgba(240,201,129,.18); letter-spacing:.12em; }
-    .hero-copy h1 { color:#f2f0e9 !important; text-shadow:0 8px 28px rgba(0,0,0,.28); }
+    .hero-copy h1 { color:#f2f0e9 !important; text-shadow:0 8px 28px rgba(0,0,0,.28); overflow:visible !important; }
+    html[dir="rtl"] .hero-copy h1 { direction:rtl !important; text-align:right !important; letter-spacing:0 !important; line-height:1.02 !important; padding-inline:4px !important; }
     .hero-copy h1 em { color:#f0c981 !important; background:linear-gradient(110deg,#d6a45c 0%,#f0c981 48%,#fff1d0 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-shadow:none; }
     .hero-copy .hero-summary { color:#d9d4cc !important; }
     .portrait-label { background:rgba(8,10,14,.88) !important; color:#fff1d0 !important; border:1px solid rgba(240,201,129,.72) !important; box-shadow:0 8px 26px rgba(0,0,0,.28),0 0 18px rgba(240,201,129,.10); backdrop-filter:blur(6px); }
     .portrait-label strong { color:#f0c981 !important; }
 
-    /* Subtle audio movement, tuned to stay light on performance. */
     .audio-lines i { background:linear-gradient(to top,#d6a45c,#fff1d0) !important; box-shadow:0 0 7px rgba(240,201,129,.24); transform-origin:center; animation:audioPulse 1.9s ease-in-out infinite; }
     .audio-lines i:nth-child(2), .audio-lines i:nth-child(6) { animation-delay:.18s; }
     .audio-lines i:nth-child(3), .audio-lines i:nth-child(5) { animation-delay:.36s; }
     .audio-lines i:nth-child(4) { animation-delay:.54s; }
 
-    /* Performance fix: remove the expensive full-screen grain filter. */
     .grain { display:none !important; }
 
     @keyframes audioPulse { 0%,100% { transform:scaleY(.72); opacity:.58; } 50% { transform:scaleY(1); opacity:1; } }
-    @keyframes portraitTilt { 0%,100% { transform:rotate(-4deg) scale(1); } 50% { transform:rotate(4deg) scale(1.01); } }
+    @keyframes portraitTilt { 0%,100% { transform:rotate(-.8deg) scale(1); } 50% { transform:rotate(.8deg) scale(1.005); } }
     @keyframes portraitRingSpin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
     @keyframes orbitSpinOne { from { transform:translateZ(0) rotate(0deg); } to { transform:translateZ(0) rotate(360deg); } }
     @keyframes orbitSpinTwo { from { transform:translateZ(0) rotate(30deg); } to { transform:translateZ(0) rotate(390deg); } }
-    @media (max-width:760px) { .orbit-one { animation-duration:36s; } .orbit-two { animation-duration:46s; } .orbit::before { width:8px; height:8px; top:-4px; left:calc(50% - 4px); } }
+    @media (max-width:760px) { .orbit-one { animation-duration:36s; } .orbit-two { animation-duration:46s; } .orbit::before { width:8px; height:8px; top:-4px; left:calc(50% - 4px); } html[dir="rtl"] .hero-copy h1 { padding-inline:6px !important; } }
     @media (prefers-reduced-motion:reduce) { .portrait-frame,.portrait-frame::before,.orbit-one,.orbit-two,.audio-lines i { animation:none; } }
   `;
   document.head.appendChild(style);
